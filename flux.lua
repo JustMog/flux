@@ -47,6 +47,24 @@ for k, v in pairs(easing) do
   ]], v)
 end
 
+function flux.easing.bounceout(t)
+  t = t * 0.909
+  if t < 1 / 2.75 then return (7.5625 * t * t)end
+  if t < 2 / 2.75 then
+    t = t - (1.5 / 2.75)
+    return (7.5625 * t * t + 0.75)
+  end
+  t = t - (2.25 / 2.75)
+  return  (7.5625 * t * t + 0.9375)
+end
+
+function flux.easing.bouncein(x) return 1 - flux.easing.bounceout(1 - x) end
+function flux.easing.bounceinout(x)
+  return x < 0.5
+  and (1 - flux.easing.bounceout(1 - 2 * x)) / 2
+  or (1 + flux.easing.bounceout(2 * x - 1)) / 2;
+end
+
 
 
 local tween = {}
